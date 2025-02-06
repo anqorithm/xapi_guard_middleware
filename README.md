@@ -116,6 +116,32 @@ curl -X POST http://localhost:8000/protected -H "X-API-Key: YOUR_API_KEY"
 # Status code: 200
 ```
 
+## Demo
+
+```bash
+git clone https://github.com/anqorithm/xapi-guard-middleware.git
+cd xapi-guard-middleware
+poetry install
+poetry run uvicorn app:app --reload
+```
+
+* The FastAPI app is protected by the XAPI Guard Middleware
+![image](./assets/1.png)
+
+* X-API-Key header is missing
+![image](./assets/2.png)
+
+* X-API-Key header is invalid
+![image](./assets/5.png)
+
+* Authorized request
+![image](./assets/3.png)
+
+* OpenAPI/Swagger documentation
+![image](./assets/4.png)
+
+
+
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request.

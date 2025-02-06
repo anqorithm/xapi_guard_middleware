@@ -4,7 +4,7 @@ from xapi_guard_middleware import XApiKeyMiddleware
 from xapi_guard_middleware import XAPIGuard
 from http import HTTPMethod
 
-app = FastAPI(title="XAPI Guard Protected API")
+app = FastAPI(title="XAPI Guard Middleware Protected API")
 
 API_KEY = "OuGpk!Qo@Fdet#P^EQ8vGaknVOO"
 
