@@ -49,6 +49,7 @@ guard = XAPIGuard(app)
 app.add_middleware(
     XApiKeyMiddleware,
     api_key=API_KEY,
+    # Exclude paths from protection, by default the middleware will protect all paths
     exclude_paths={
         "/",
         "/docs",
