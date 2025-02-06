@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xapi-guard-middleware"
-version = "0.1.1"
+version = "0.1.2"
 description = "XAPI Guard is a FastAPI middleware that protects your API endpoints by validating X-API-Key header."
 authors = ["Abdullah Alqahtani <anqorithm@protonmail.com>"]
 packages = [

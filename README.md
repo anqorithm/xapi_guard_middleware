@@ -17,8 +17,8 @@ poetry install xapi-guard
 ```python
 from fastapi import FastAPI
 from fastapi.security import APIKeyHeader
-from xapi_guard import XApiKeyMiddleware
-from xapi_guard import XAPIGuard
+from xapi_guard_middleware import XApiKeyMiddleware
+from xapi_guard_middleware import XAPIGuard
 from http import HTTPMethod
 
 app = FastAPI(title="XAPI Guard Protected API")
