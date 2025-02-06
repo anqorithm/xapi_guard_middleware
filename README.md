@@ -67,6 +67,7 @@ async def read_root():
 async def health_check():
     return {"status": "healthy"}
 
+# The goal of this decorator is to add the X-API-Key header to the request in OpenAPI/Swagger documentation
 @guard.protect("/protected", method=HTTPMethod.POST)
 async def protected_route():
     return {"message": "This is a protected route"}
