@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "xapi-guard-middleware"
+version = "0.1.1"
+description = "XAPI Guard is a FastAPI middleware that protects your API endpoints by validating X-API-Key header."
+authors = ["Abdullah Alqahtani <anqorithm@protonmail.com>"]
+packages = [
+    { include = "xapi_guard_middleware" }
+]
+readme = "README.md"
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.109.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+httpx = "^0.28.1"
+pytest-asyncio = "^0.23.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api" 
