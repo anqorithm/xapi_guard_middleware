@@ -2,11 +2,12 @@
 
 [![PyPI version](https://badge.fury.io/py/xapi-guard-middleware.svg)](https://badge.fury.io/py/xapi-guard-middleware)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python Versions](https://img.shields.io/pypi/pyversions/xapi-guard-middleware.svg)](https://pypi.org/project/xapi-guard-middleware/)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/xapi-guard-middleware)
-![XAPI Guard](https://img.shields.io/badge/XAPI_Guard-0.1.3-blue)
+![XAPI Guard](https://img.shields.io/badge/XAPI_Guard-0.1.6-blue)
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.109.0-blue)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+[![Downloads](https://img.shields.io/pypi/dm/xapi-guard-middleware)](https://pypi.org/project/xapi-guard-middleware/)
 
 XAPI Guard is FastAPI middleware that protects your API endpoints by validating the X-API-Key header. It's designed in a decorator style, so you can annotate your FastAPI endpoints with `@guard.protect` to protect them.
 
