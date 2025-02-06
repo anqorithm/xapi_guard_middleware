@@ -37,64 +37,39 @@ pip install xapi-guard-middleware
 ```python
 from fastapi import FastAPI
 from fastapi.security import APIKeyHeader
-from xapi_guard_middleware import XApiKeyMiddleware
-from xapi_guard_middleware import XAPIGuard
+from xapi_guard_middleware import XApiKeyMiddleware, XAPIGuard
 from http import HTTPMethod
 
-# Create FastAPI app
-app = FastAPI(title="XAPI Guard Protected API")
+app = FastAPI(title="XAPI Guard Middleware Protected API")
 
-# Your API key
 API_KEY = "OuGpk!Qo@Fdet#P^EQ8vGaknVOO"
 
-# API key header configuration
-api_key_header = APIKeyHeader(name="X-API-Key", auto_error=True)
-
-# Create guard instance
 guard = XAPIGuard(app)
 
-# Add middleware with excluded paths
 app.add_middleware(
     XApiKeyMiddleware,
     api_key=API_KEY,
-    exclude_paths={  # Public paths
+    exclude_paths={
         "/",
         "/docs",
+        "/health",
         "/redoc",
+        "/favicon.ico",
         "/openapi.json",
     },
 )
 
-# Public route
 @app.get("/")
 async def read_root():
-    return {"message": "Hello Protected World!"}
+    return {"message": "Hello World!"}
 
-# Public health check
 @app.get("/health")
 async def health_check():
     return {"status": "healthy"}
 
-# Protected route - requires API key
 @guard.protect("/protected", method=HTTPMethod.POST)
 async def protected_route():
     return {"message": "This is a protected route"}
-```
-
-## Usage Examples
-
-### Protecting Specific HTTP Methods
-
-```python
-# Protect only POST requests
-@guard.protect("/users", method=HTTPMethod.POST)
-async def create_user():
-    return {"message": "User created"}
-
-# Protect specific method
-@guard.protect("/admin", method=HTTPMethod.GET)
-async def admin_route():
-    return {"message": "Admin access"}
 ```
 
 ### Making Requests
