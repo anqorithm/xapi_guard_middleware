@@ -80,6 +80,8 @@ app.include_router(admin_router, prefix="/secure")
 app.include_router(settings_router, prefix="/secure")
 ```
 
+## Demo
+
 ### Making Requests
 
 ```bash
@@ -97,15 +99,6 @@ curl -X GET http://localhost:8000/secure/admin -H "X-API-Key: wrong-key"
 curl -X GET http://localhost:8000/secure/admin -H "X-API-Key: YOUR_API_KEY"
 # Response: {"message": "Welcome to the admin area!"}
 # Status code: 200
-```
-
-## Demo
-
-```bash
-git clone https://github.com/anqorithm/xapi-guard-middleware.git
-cd xapi-guard-middleware
-poetry install
-poetry run uvicorn app:app --reload
 ```
 
 * The FastAPI app is protected by the XAPI Guard Middleware
