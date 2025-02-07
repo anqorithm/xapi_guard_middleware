@@ -1,4 +1,4 @@
-from .error_codes import APIErrorCode
 from .middleware import XAPIGuardMiddleware
 
-__all__ = ["XAPIGuardMiddleware", "APIErrorCode"]
+__version__ = "1.0.3"
+__all__ = ["XAPIGuardMiddleware"]

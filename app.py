@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends, APIRouter
 from xapi_guard_middleware.middleware import XAPIGuardMiddleware
+from xapi_guard_middleware.error_codes import APIErrorCode
 
 app = FastAPI(title="XAPI Guard Middleware Example")
 
@@ -9,7 +10,6 @@ guard = XAPIGuardMiddleware(x_api_key="DEN#3xTezZDo1nJg1pO$tIrzQ9A")
 admin_router = APIRouter(dependencies=[Depends(guard.protect)])
 settings_router = APIRouter(dependencies=[Depends(guard.protect)])
 public_router = APIRouter()
-
 
 # General routes
 @app.get("/", tags=["General"])
