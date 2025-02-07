@@ -4,9 +4,9 @@
 [![PyPI version](https://img.shields.io/pypi/v/xapi-guard-middleware
 )](https://img.shields.io/pypi/v/xapi-guard-middleware)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![XAPI Guard](https://img.shields.io/badge/XAPI_Guard-1.0.0-blue)
-![Python](https://img.shields.io/badge/Python-3.12-blue)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.109.0-blue)
+![XAPI Guard](https://img.shields.io/badge/XAPI_Guard-1.0.6-blue)
+![Python](https://img.shields.io/badge/Python->=3.11,<4.0-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI->=0.109.0,<0.115.8-blue)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Tests](https://img.shields.io/badge/Tests-Pytest-green)](https://docs.pytest.org/)
 [![Coverage](https://img.shields.io/badge/Coverage-100%25-brightgreen)](https://coverage.py/)
