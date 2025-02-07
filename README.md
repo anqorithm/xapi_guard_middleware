@@ -1,12 +1,14 @@
 # XAPI Guard Middleware
 
 [![Downloads](https://img.shields.io/pypi/dm/xapi-guard-middleware)](https://pypi.org/project/xapi-guard-middleware/)
-[![PyPI version](https://badge.fury.io/py/xapi-guard-middleware.svg)](https://badge.fury.io/py/xapi-guard-middleware)
+[![PyPI version](https://img.shields.io/pypi/v/xapi-guard-middleware)](https://img.shields.io/pypi/v/xapi-guard-middleware)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![XAPI Guard](https://img.shields.io/badge/XAPI_Guard-0.1.6-blue)
-![Python](https://img.shields.io/badge/Python-3.11-blue)
+![XAPI Guard](https://img.shields.io/badge/XAPI_Guard-1.0.0-blue)
+![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.109.0-blue)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Tests](https://img.shields.io/badge/Tests-Pytest-green)](https://docs.pytest.org/)
+[![Coverage](https://img.shields.io/badge/Coverage-100%25-brightgreen)](https://coverage.py/)
 
 XAPI Guard is FastAPI middleware that protects your API endpoints by validating the X-API-Key header. It's designed in a decorator style, so you can annotate your FastAPI endpoints with `@guard.protect` to protect them.
 
@@ -77,6 +79,16 @@ app.include_router(admin_router, prefix="/secure")
 app.include_router(settings_router, prefix="/secure")
 ```
 
+## Demo
+
+### Running the app
+```bash
+git clone https://github.com/anqorithm/xapi-guard-middleware.git
+cd xapi-guard-middleware
+poetry install
+poetry run uvicorn app:app --reload
+```
+
 ### Making Requests
 
 ```bash
@@ -96,16 +108,9 @@ curl -X GET http://localhost:8000/secure/admin -H "X-API-Key: YOUR_API_KEY"
 # Status code: 200
 ```
 
-## Demo
 
-```bash
-git clone https://github.com/anqorithm/xapi-guard-middleware.git
-cd xapi-guard-middleware
-poetry install
-poetry run uvicorn app:app --reload
-```
 
-* The FastAPI app is protected by the XAPI Guard Middleware
+<!-- * The FastAPI app is protected by the XAPI Guard Middleware
 ![image](./assets/1.png)
 
 * X-API-Key header is missing
@@ -117,7 +122,7 @@ poetry run uvicorn app:app --reload
 
 * X-API-Key header is valid
 ![image](./assets/5.png)
-![image](./assets/6.png)
+![image](./assets/6.png) -->
 
 
 ## Contributing
