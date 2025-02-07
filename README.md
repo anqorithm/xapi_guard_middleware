@@ -1,7 +1,8 @@
 # XAPI Guard Middleware
 
 [![Downloads](https://img.shields.io/pypi/dm/xapi-guard-middleware)](https://pypi.org/project/xapi-guard-middleware/)
-[![PyPI version](https://img.shields.io/pypi/v/xapi-guard-middleware)](https://img.shields.io/pypi/v/xapi-guard-middleware)
+[![PyPI version](https://img.shields.io/pypi/v/xapi-guard-middleware
+)](https://img.shields.io/pypi/v/xapi-guard-middleware)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![XAPI Guard](https://img.shields.io/badge/XAPI_Guard-1.0.0-blue)
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
@@ -79,16 +80,6 @@ app.include_router(admin_router, prefix="/secure")
 app.include_router(settings_router, prefix="/secure")
 ```
 
-## Demo
-
-### Running the app
-```bash
-git clone https://github.com/anqorithm/xapi-guard-middleware.git
-cd xapi-guard-middleware
-poetry install
-poetry run uvicorn app:app --reload
-```
-
 ### Making Requests
 
 ```bash
@@ -108,9 +99,16 @@ curl -X GET http://localhost:8000/secure/admin -H "X-API-Key: YOUR_API_KEY"
 # Status code: 200
 ```
 
+## Demo
 
+```bash
+git clone https://github.com/anqorithm/xapi-guard-middleware.git
+cd xapi-guard-middleware
+poetry install
+poetry run uvicorn app:app --reload
+```
 
-<!-- * The FastAPI app is protected by the XAPI Guard Middleware
+* The FastAPI app is protected by the XAPI Guard Middleware
 ![image](./assets/1.png)
 
 * X-API-Key header is missing
@@ -122,7 +120,7 @@ curl -X GET http://localhost:8000/secure/admin -H "X-API-Key: YOUR_API_KEY"
 
 * X-API-Key header is valid
 ![image](./assets/5.png)
-![image](./assets/6.png) -->
+![image](./assets/6.png)
 
 
 ## Contributing
