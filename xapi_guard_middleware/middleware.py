@@ -1,76 +1,45 @@
-from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.responses import JSONResponse
 from http import HTTPStatus
+from fastapi import HTTPException, Depends
+from fastapi.security import APIKeyHeader
+from .error_codes import APIErrorCode
 
 
-class XApiKeyMiddleware(BaseHTTPMiddleware):
-    """FastAPI middleware for API key authentication.
+class XAPIGuardMiddleware:
+    """
+    Middleware to protect routes with an API key.
 
-    This middleware validates the x-api-key header against a predefined API key.
-    Requests to excluded paths bypass the validation.
-
-    Args:
-        app: The FastAPI application
-        api_key: The API key to validate against
-        exclude_paths: Set of paths to exclude from validation
+    Attributes:
+        x_api_key (str): The valid API key for authentication.
+        x_api_key_header (APIKeyHeader): The FastAPI security dependency for API key header.
     """
 
-    def __init__(self, app, api_key: str, exclude_paths: set = None):
-        """Initialize the middleware.
+    def __init__(self, x_api_key: str):
+        """
+        Initializes the XAPIGuardMiddleware with the provided API key.
 
         Args:
-            app: The FastAPI application
-            api_key: The API key to validate against
-            exclude_paths: Set of paths to exclude from validation
+            x_api_key (str): The valid API key to be used for authentication.
+        """
+        self.x_api_key = x_api_key
+        self.x_api_key_header = APIKeyHeader(name="X-API-Key", auto_error=True)
+
+    async def protect(
+        self, x_api_key: str = Depends(APIKeyHeader(name="X-API-Key", auto_error=True))
+    ):
+        """
+        Protects a route by validating the provided API key.
+
+        Args:
+            x_api_key (str): The API key provided in the request header.
 
         Raises:
-            ValueError: If api_key is empty
+            HTTPException: If the API key is invalid, a 403 Forbidden error is raised.
         """
-        super().__init__(app)
-        if not api_key:
-            raise ValueError("API key cannot be empty")
-        self.api_key = api_key
-        self.exclude_paths = exclude_paths or set()
-
-    async def dispatch(self, request, call_next):
-        """Validate the x-api-key header in the request.
-
-        Args:
-            request: The incoming request
-            call_next: The next middleware in the chain
-
-        Returns:
-            Response: The response from the next middleware or an error response
-
-        Response Codes:
-            200: Request successful
-            401: API key missing
-            403: Invalid API key
-            500: Internal server error
-        """
-        try:
-            if request.url.path in self.exclude_paths:
-                return await call_next(request)
-
-            api_key = request.headers.get("X-API-Key")
-
-            if not api_key:
-                return JSONResponse(
-                    status_code=HTTPStatus.UNAUTHORIZED,
-                    content={"detail": "X-API-Key header missing"},
-                )
-
-            if api_key != self.api_key:
-                return JSONResponse(
-                    status_code=HTTPStatus.FORBIDDEN,
-                    content={"detail": "Invalid X-API-Key"},
-                )
-
-            response = await call_next(request)
-            return response
-
-        except Exception:
-            return JSONResponse(
-                status_code=HTTPStatus.INTERNAL_SERVER_ERROR,
-                content={"detail": "Internal server error"},
+        if x_api_key != self.x_api_key:
+            raise HTTPException(
+                status_code=HTTPStatus.FORBIDDEN,
+                detail={
+                    "code": APIErrorCode.INVALID_API_KEY.value,
+                    "message": "Invalid API key",
+                },
             )

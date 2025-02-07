@@ -1,5 +1,6 @@
 # XAPI Guard Middleware
 
+[![Downloads](https://img.shields.io/pypi/dm/xapi-guard-middleware)](https://pypi.org/project/xapi-guard-middleware/)
 [![PyPI version](https://badge.fury.io/py/xapi-guard-middleware.svg)](https://badge.fury.io/py/xapi-guard-middleware)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![XAPI Guard](https://img.shields.io/badge/XAPI_Guard-0.1.6-blue)
@@ -7,17 +8,15 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.109.0-blue)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-[![Downloads](https://img.shields.io/pypi/dm/xapi-guard-middleware)](https://pypi.org/project/xapi-guard-middleware/)
-
 XAPI Guard is FastAPI middleware that protects your API endpoints by validating the X-API-Key header. It's designed in a decorator style, so you can annotate your FastAPI endpoints with `@guard.protect` to protect them.
 
 ## Features
 
-- Annotate your FastAPI endpoints with `@guard.protect` to protect them
-- Protect specific HTTP methods (GET, POST, PUT, DELETE, etc.)
-- Exclude paths from protection (e.g. /docs, /openapi.json, etc.)
-- Configure API key header name and auto error
-- Support for OpenAPI/Swagger documentation (with `@guard.protect` annotation)
+- Protect your FastAPI endpoints by validating the `X-API-Key` header.
+- Use `@guard.protect` to secure specific routes or entire routers.
+- Easily configure which routes require protection and which are public.
+- Automatically handle unauthorized access with appropriate error messages.
+- Support for OpenAPI/Swagger documentation with protected routes.
 
 ## Installation
 
@@ -36,61 +35,64 @@ pip install xapi-guard-middleware
 ## Quick Start
 
 ```python
-from fastapi import FastAPI
-from fastapi.security import APIKeyHeader
-from xapi_guard_middleware import XApiKeyMiddleware, XAPIGuard
-from http import HTTPMethod
+from fastapi import FastAPI, Depends, APIRouter
+from xapi_guard_middleware.middleware import XAPIGuardMiddleware
 
-app = FastAPI(title="XAPI Guard Middleware Protected API")
+app = FastAPI(title="XAPI Guard Middleware Example")
 
-API_KEY = "OuGpk!Qo@Fdet#P^EQ8vGaknVOO"
+guard = XAPIGuardMiddleware(x_api_key="DEN#3xTezZDo1nJg1pO$tIrzQ9A")
 
-guard = XAPIGuard(app)
+# Routers for different route groups
+admin_router = APIRouter(dependencies=[Depends(guard.protect)])
+settings_router = APIRouter(dependencies=[Depends(guard.protect)])
+public_router = APIRouter()
 
-app.add_middleware(
-    XApiKeyMiddleware,
-    api_key=API_KEY,
-    # Exclude paths from protection, by default the middleware will protect all paths
-    exclude_paths={
-        "/",
-        "/docs",
-        "/health",
-        "/redoc",
-        "/favicon.ico",
-        "/openapi.json",
-    },
-)
+# General routes
+@app.get("/", tags=["General"])
+async def root():
+    return {"message": "Hello World"}
 
-@app.get("/")
-async def read_root():
-    return {"message": "Hello World!"}
-
-@app.get("/health")
-async def health_check():
+@app.get("/health", tags=["General"])
+async def health():
     return {"status": "healthy"}
 
-# The goal of this decorator is to add the X-API-Key header to the request in OpenAPI/Swagger documentation
-@guard.protect("/protected", method=HTTPMethod.POST)
-async def protected_route():
-    return {"message": "This is a protected route"}
+# Public routes
+@public_router.get("/public", tags=["Public"])
+async def public():
+    return {"message": "This is a public endpoint accessible to everyone."}
+
+# Admin routes
+@admin_router.get("/admin", tags=["Admin"])
+async def admin():
+    return {"message": "Welcome to the admin area!"}
+
+# Settings routes
+@settings_router.get("/settings", tags=["Settings"])
+async def settings():
+    return {"message": "Settings page, accessible only to authorized users."}
+
+# Include the routers in the main app
+app.include_router(public_router)
+app.include_router(admin_router, prefix="/secure")
+app.include_router(settings_router, prefix="/secure")
 ```
 
 ### Making Requests
 
 ```bash
 # Unauthorized request (missing API key)
-curl -X POST http://localhost:8000/protected
+curl -X GET http://localhost:8000/secure/admin
 # Response: {"detail": "X-API-Key header missing"}
 # Status code: 401
 
 # Unauthorized request (invalid API key)
-curl -X POST http://localhost:8000/protected -H "X-API-Key: wrong-key"
+curl -X GET http://localhost:8000/secure/admin -H "X-API-Key: wrong-key"
 # Response: {"detail": "Invalid X-API-Key"}
 # Status code: 403
 
 # Authorized request
-curl -X POST http://localhost:8000/protected -H "X-API-Key: YOUR_API_KEY"
-# Response: {"message": "This is a protected route"}
+curl -X GET http://localhost:8000/secure/admin -H "X-API-Key: YOUR_API_KEY"
+# Response: {"message": "Welcome to the admin area!"}
 # Status code: 200
 ```
 
@@ -110,14 +112,12 @@ poetry run uvicorn app:app --reload
 ![image](./assets/2.png)
 
 * X-API-Key header is invalid
-![image](./assets/5.png)
-
-* Authorized request
 ![image](./assets/3.png)
-
-* OpenAPI/Swagger documentation
 ![image](./assets/4.png)
 
+* X-API-Key header is valid
+![image](./assets/5.png)
+![image](./assets/6.png)
 
 
 ## Contributing
