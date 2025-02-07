@@ -1,6 +1,5 @@
 from enum import Enum
 
-
 class APIErrorCode(Enum):
     """Enumeration of API error codes."""
 
