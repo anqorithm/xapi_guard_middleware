@@ -3,7 +3,6 @@ from fastapi import HTTPException, Depends
 from fastapi.security import APIKeyHeader
 from .error_codes import APIErrorCode
 
-
 class XAPIGuardMiddleware:
     """
     Middleware to protect routes with an API key.
