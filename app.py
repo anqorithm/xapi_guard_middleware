@@ -1,6 +1,5 @@
 from fastapi import FastAPI, Depends, APIRouter
-from xapi_guard_middleware.middleware import XAPIGuardMiddleware
-from xapi_guard_middleware.error_codes import APIErrorCode
+from xapi_guard_middleware import XAPIGuardMiddleware
 
 app = FastAPI(title="XAPI Guard Middleware Example")
 
