@@ -10,6 +10,7 @@ admin_router = APIRouter(dependencies=[Depends(guard.protect)])
 settings_router = APIRouter(dependencies=[Depends(guard.protect)])
 public_router = APIRouter()
 
+
 # General routes
 @app.get("/", tags=["General"])
 async def root():

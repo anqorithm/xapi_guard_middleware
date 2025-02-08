@@ -92,6 +92,18 @@ app.include_router(settings_router, prefix="/secure")
 
 ## Demo
 
+### Running the FastAPI app
+
+```bash
+$ poetry install
+
+$ poetry shell
+
+$ poetry run uvicorn examples.app:app --reload
+```
+
+![image](./assets/7.png)
+
 ### Making Requests
 
 ```bash
