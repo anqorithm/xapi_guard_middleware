@@ -3,7 +3,7 @@ from xapi_guard_middleware import XAPIGuardMiddleware
 
 app = FastAPI(title="XAPI Guard Middleware Example")
 
-guard = XAPIGuardMiddleware(x_api_key="DEN#3xTezZDo1nJg1pO$tIrzQ9A")
+guard = XAPIGuardMiddleware(x_api_key="sk_85BnHrWHbLEKty7gNXVSwP385eLZipN6UvlSRjcvOXucwWq7MqAmvB5PhQ5xhy5n0uVFxluUuomCzRpoNuL7ffEnMApAs9hwIUDtoWN1je9ZYIkqAz6qrVSWdbZs8")
 
 # Routers for different route groups
 admin_router = APIRouter(dependencies=[Depends(guard.protect)])

@@ -110,7 +110,12 @@ $ poetry run uvicorn examples.app:app --reload
 ```bash
 # Unauthorized request (invalid API key)
 curl -X GET http://localhost:8000/secure/admin -H "X-API-Key: wrong-key"
-# Response: {"detail": "Invalid X-API-Key"}
+# {
+#   "detail": {
+#     "code": "INVALID_API_KEY",
+#     "message": "Invalid API key"
+#   }
+# }
 # Status code: 403
 
 # Authorized request
