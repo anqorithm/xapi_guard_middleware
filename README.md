@@ -95,11 +95,6 @@ app.include_router(settings_router, prefix="/secure")
 ### Making Requests
 
 ```bash
-# Unauthorized request (missing API key)
-curl -X GET http://localhost:8000/secure/admin
-# Response: {"detail": "X-API-Key header missing"}
-# Status code: 401
-
 # Unauthorized request (invalid API key)
 curl -X GET http://localhost:8000/secure/admin -H "X-API-Key: wrong-key"
 # Response: {"detail": "Invalid X-API-Key"}
