@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 260">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Group for shield and text -->
+  <g transform="translate(50, 10)">
+    <!-- Simplified Shield -->
+    <path d="M100 20 
+             L180 50 
+             L180 110 
+             C180 150 100 180 100 180 
+             C100 180 20 150 20 110 
+             L20 50 Z" 
+          fill="#000000" 
+          stroke="#000000" 
+          stroke-width="2"/>
+    
+    <!-- Lock Group -->
+    <g transform="translate(0, -5)">
+      <!-- Lock Body -->
+      <rect x="65" y="95" 
+            width="70" height="55" 
+            rx="8" ry="8" 
+            fill="#FFFFFF"
+            stroke="#FFFFFF"
+            stroke-width="1"/>
+      
+      <!-- Keyhole -->
+      <circle cx="100" cy="115" r="8" 
+              fill="#000000"/>
+      <rect x="97" y="115" 
+            width="6" height="15" 
+            fill="#000000"/>
+      
+      <!-- Lock Shackle -->
+      <path d="M82 95 
+               C82 95 82 70 100 70
+               C118 70 118 95 118 95" 
+            fill="none" 
+            stroke="#FFFFFF" 
+            stroke-width="14" 
+            stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- Text Elements -->
+  <text x="150" y="230" 
+        font-family="Inter, sans-serif" 
+        font-size="24" 
+        font-weight="600" 
+        text-anchor="middle"
+        fill="#000000">
+    XAPI Guard Middleware
+  </text>
+</svg>
