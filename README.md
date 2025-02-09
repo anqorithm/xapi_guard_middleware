@@ -1,5 +1,9 @@
 # XAPI Guard Middleware
 
+<p align="center">
+  <img src="./assets/xapi-guard-logo.svg" alt="ZLoggerKit Logo" width="400"/>
+</p>
+
 [![Downloads](https://img.shields.io/pypi/dm/xapi-guard-middleware)](https://pypi.org/project/xapi-guard-middleware/)
 [![PyPI version](https://img.shields.io/pypi/v/xapi-guard-middleware
 )](https://img.shields.io/pypi/v/xapi-guard-middleware)
