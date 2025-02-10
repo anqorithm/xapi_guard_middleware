@@ -41,6 +41,49 @@ pip install xapi-guard-middleware
 
 ## Quick Start
 
+### Generating a Secure API Key
+
+For security best practices, XAPI Guard recommends using 128-bit API keys with mixed letters and numbers. You can generate a secure API key using one of these methods:
+
+1. Using the recommended online generator:
+   - Visit [generate-random.org/api-key-generator](https://generate-random.org/api-key-generator)
+   - Select "128-bit" length
+   - Choose "Mixed letters & Numbers" type (recommended)
+   - Click "Generate API Keys"
+
+2. Using Python's secrets module (recommended for production):
+```python
+import secrets
+import string
+
+
+def generate_api_key(length=64):
+    alphabet = string.ascii_letters + string.digits
+    key = "".join(secrets.choice(alphabet) for _ in range(length))
+    return f"sk_{key}"
+
+
+api_key = generate_api_key()
+print(api_key)
+```
+
+You can save this script as `scripts/generator.py` and run it directly:
+```bash
+python3 scripts/generator.py
+# Output: sk_mpo0ad7e4AlqYyinUZenCaXlerWr48aG30kgjGeXxFrEvH895C2qUtISBLIgc1Ek
+```
+
+Example API key format:
+```
+sk_mpo0ad7e4AlqYyinUZenCaXlerWr48aG30kgjGeXxFrEvH895C2qUtISBLIgc1Ek
+```
+
+**Security Tips:**
+- Always use 128-bit or longer keys for production environments
+- Avoid using special characters to ensure compatibility across different systems
+- Store API keys securely and never commit them to version control
+- Rotate API keys periodically for enhanced security
+
 ```python
 from fastapi import FastAPI, Depends, APIRouter
 from xapi_guard_middleware import XAPIGuardMiddleware
