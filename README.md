@@ -67,7 +67,7 @@ api_key = generate_api_key()
 print(api_key)
 ```
 
-You can save this script as `scripts/generator.py` and run it directly:
+You can run this script from `scripts/generator.py`:
 ```bash
 python3 scripts/generator.py
 # Output: sk_mpo0ad7e4AlqYyinUZenCaXlerWr48aG30kgjGeXxFrEvH895C2qUtISBLIgc1Ek
